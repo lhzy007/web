@@ -1,1 +1,381 @@
- 
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一个网页</title>
+    <!-- 引入字体图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- 引入动画库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #3498db;
+        }
+
+        /* 英雄区域样式 */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 1rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s;
+        }
+
+        /* 按钮样式 */
+        .btn {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #fff;
+            color: #3b82f6;
+            margin-right: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        /* 特性区域样式 */
+        .features {
+            padding: 5rem 2rem;
+            background-color: #f8fafc;
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #3b82f6;
+            margin-bottom: 1rem;
+        }
+
+        /* 项目展示区域 */
+        .projects {
+            padding: 5rem 2rem;
+        }
+
+        .projects-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .project-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover .project-info {
+            transform: translateY(0);
+        }
+
+        /* 联系表单样式 */
+        .contact {
+            padding: 5rem 2rem;
+            background-color: #f8fafc;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #4b5563;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        /* 页脚样式 */
+        .footer {
+            background-color: #1f2937;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .social-links {
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #3b82f6;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">Logo</div>
+            <div class="nav-links">
+                <a href="#home">首页</a>
+                <a href="#features">特性</a>
+                <a href="#projects">项目</a>
+                <a href="#contact">联系我们</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="animate__animated animate__fadeInDown">欢迎来到我们的网站</h1>
+            <p class="animate__animated animate__fadeInUp">探索无限可能，创造精彩未来</p>
+            <button class="btn btn-primary animate__animated animate__fadeInUp">了解更多</button>
+            <button class="btn animate__animated animate__fadeInUp">联系我们</button>
+        </div>
+    </section>
+
+    <!-- 特性区域 -->
+    <section class="features" id="features">
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-rocket feature-icon"></i>
+                <h3>快速部署</h3>
+                <p>简单快捷的部署流程，让您的项目立即上线。</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-shield-alt feature-icon"></i>
+                <h3>安全可靠</h3>
+                <p>采用最新的安全技术，保护您的数据安全。</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-cogs feature-icon"></i>
+                <h3>灵活定制</h3>
+                <p>根据您的需求，提供个性化的解决方案。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 项目展示 -->
+    <section class="projects" id="projects">
+        <div class="projects-grid">
+            <div class="project-card">
+                <img src="https://picsum.photos/600/400?random=1" alt="项目1">
+                <div class="project-info">
+                    <h3>项目一</h3>
+                    <p>创新的解决方案</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://picsum.photos/600/400?random=2" alt="项目2">
+                <div class="project-info">
+                    <h3>项目二</h3>
+                    <p>突破性的技术</p>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src="https://picsum.photos/600/400?random=3" alt="项目3">
+                <div class="project-info">
+                    <h3>项目三</h3>
+                    <p>卓越的用户体验</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系表单 -->
+    <section class="contact" id="contact">
+        <div class="contact-form">
+            <h2>联系我们</h2>
+            <form>
+                <div class="form-group">
+                    <label for="name">姓名</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">邮箱</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">消息</label>
+                    <textarea id="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">发送消息</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <p>&copy; 2024 版权所有</p>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-weixin"></i></a>
+            <a href="#"><i class="fab fa-weibo"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+        </div>
+    </footer>
+
+    <!-- 添加平滑滚动效果 -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
